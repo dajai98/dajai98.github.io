@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainStorm Profile</title>
+    <script>
+        // Get profile ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const profileId = urlParams.get('id') || '';
+        
+        // Store profile ID in Play Store referrer
+        const playStoreUrl = `https://play.google.com/store/apps/details?id=com.dajaistudio.brainstorm&referrer=profile_id%3D${profileId}`;
+        
+        // Redirect to Play Store
+        window.location.replace(playStoreUrl);
+    </script>
+    <!-- Fallback if JavaScript is disabled -->
+    <meta http-equiv="refresh" content="2;url=https://play.google.com/store/apps/details?id=com.dajaistudio.brainstorm">
+</head>
+<body>
+    <p>Redirecting to Play Store...</p>
+</body>
+</html>
