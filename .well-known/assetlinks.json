@@ -1,1 +1,8 @@
-
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.dajaistudio.brainstorm",
+    "sha256_cert_fingerprints": ["69:E9:D9:85:E9:23:AD:96:25:C8:66:0B:A0:B2:ED:4D:11:FF:D6:CD:B2:6F:E2:13:AA:11:E1:0E:AA:04:4D:85"]
+  }
+}]
