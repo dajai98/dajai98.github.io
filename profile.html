@@ -1,24 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainStorm Profile</title>
+    <title>BrainStorm - Profile Link</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 400px;
+        }
+        .loader {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h1 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        p {
+            margin: 0.5rem 0;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        .profile-id {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            margin: 1rem 0;
+        }
+        .button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: scale(1.05);
+        }
+        .fallback {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ BrainStorm Profile</h1>
+        
+        <div id="content">
+            <p>Preparing your profile link...</p>
+            <div class="loader"></div>
+        </div>
+        
+        <div id="profileInfo" style="display: none;">
+            <p>You're viewing profile:</p>
+            <div class="profile-id" id="profileId"></div>
+            <a href="#" id="directLink" class="button">Open in App</a>
+            <p class="fallback">Don't have the app? You'll be redirected to Play Store</p>
+        </div>
+    </div>
+
     <script>
         // Get profile ID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const profileId = urlParams.get('id') || '';
+        let profileId = urlParams.get('id');
         
-        // Store profile ID in Play Store referrer
+        // If no ID provided, use a default for testing
+        if (!profileId) {
+            profileId = 'BS' + Date.now();
+        }
+        
+        // Display profile ID
+        document.getElementById('profileId').textContent = profileId;
+        
+        // Update direct link
+        document.getElementById('directLink').href = `https://dajai98.github.io/profile/${profileId}`;
+        
+        // Show profile info after 2 seconds
+        setTimeout(() => {
+            document.getElementById('content').style.display = 'none';
+            document.getElementById('profileInfo').style.display = 'block';
+        }, 2000);
+        
+        // Redirect to Play Store with referrer
         const playStoreUrl = `https://play.google.com/store/apps/details?id=com.dajaistudio.brainstorm&referrer=profile_id%3D${profileId}`;
         
-        // Redirect to Play Store
-        window.location.replace(playStoreUrl);
+        // Auto-redirect after 3 seconds
+        setTimeout(() => {
+            window.location.replace(playStoreUrl);
+        }, 3000);
     </script>
-    <!-- Fallback if JavaScript is disabled -->
-    <meta http-equiv="refresh" content="2;url=https://play.google.com/store/apps/details?id=com.dajaistudio.brainstorm">
-</head>
-<body>
-    <p>Redirecting to Play Store...</p>
+    <!-- Fallback if JavaScript fails -->
+    <noscript>
+        <meta http-equiv="refresh" content="5;url=https://play.google.com/store/apps/details?id=com.dajaistudio.brainstorm">
+    </noscript>
 </body>
 </html>
