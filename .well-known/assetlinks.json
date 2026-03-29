@@ -1,8 +1,12 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.dajaistudio.brainstorm",
-    "sha256_cert_fingerprints": ["69:E9:D9:85:E9:23:AD:96:25:C8:66:0B:A0:B2:ED:4D:11:FF:D6:CD:B2:6F:E2:13:AA:11:E1:0E:AA:04:4D:85"]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.dajaistudio.brainstorm",
+      "sha256_cert_fingerprints": [
+        "6D:1E:81:E6:8A:71:36:9E:E4:EC:49:95:F6:7C:9F:E6:7D:1C:00:CF:8E:3D:41:99:91:7C:7C:C3:E0:28:B0:E3"
+      ]
+    }
   }
-}]
+]
