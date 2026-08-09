@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dajai Studio — We Create Games. You Live Them.</title>
+  <meta name="description" content="Dajai Studio is an independent game studio creating original games and interactive experiences.">
+  <meta name="keywords" content="Dajai Studio, indie games, mobile games, Blazewing, BrainStorm, game development">
+  <meta name="author" content="Dajai Studio">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Dajai Studio — We Create Games. You Live Them.">
+  <meta property="og:description" content="Dajai Studio is an independent game studio creating original games and interactive experiences.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dajai98.github.io/">
+  <meta property="og:site_name" content="Dajai Studio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dajai Studio — We Create Games. You Live Them.">
+  <meta name="twitter:description" content="Dajai Studio is an independent game studio creating original games and interactive experiences.">
+
+  <link rel="canonical" href="https://dajai98.github.io/">
+
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #111118;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --accent: #f59e0b;
+      --accent-hover: #fbbf24;
+      --accent-glow: rgba(245, 158, 11, 0.3);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-accent: rgba(245, 158, 11, 0.2);
+      --shadow-glow: 0 0 40px rgba(245, 158, 11, 0.08);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Background */
+    .bg-mesh {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(245, 158, 11, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(245, 158, 11, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 50% 0%, rgba(245, 158, 11, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      background: rgba(10, 10, 15, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .nav-logo:hover {
+      color: var(--accent);
+      text-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus::after {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      animation: fadeInDown 0.8s ease-out both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-title span {
+      display: block;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 50%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, #d97706 100%);
+      color: var(--bg-primary);
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+      animation: fadeInUp 0.8s ease-out 0.8s both;
+    }
+
+    .hero-cta:hover,
+    .hero-cta:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
+      outline: none;
+    }
+
+    .hero-cta svg {
+      width: 18px;
+      height: 18px;
+      transition: transform var(--transition);
+    }
+
+    .hero-cta:hover svg,
+    .hero-cta:focus svg {
+      transform: translateY(2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-muted);
+      animation: bounce 2s infinite;
+    }
+
+    .hero-scroll svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Games Grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .game-card:hover,
+    .game-card:focus-within {
+      transform: translateY(-8px);
+      border-color: var(--border-accent);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .game-card:hover::before,
+    .game-card:focus-within::before {
+      opacity: 1;
+    }
+
+    .game-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out, border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .game-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.75rem;
+      font-weight: 800;
+    }
+
+    .game-icon.blazewing {
+      background: linear-gradient(135deg, #dc2626 0%, #f59e0b 100%);
+      color: white;
+    }
+
+    .game-icon.brainstorm {
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      color: white;
+    }
+
+    .game-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .game-genre {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid var(--border-accent);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .game-desc {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .game-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem 1.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .game-link:hover,
+    .game-link:focus {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: var(--border-accent);
+      color: var(--accent);
+      outline: none;
+    }
+
+    .game-link svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* About */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+
+    .about-text.visible {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-visual {
+      position: relative;
+      opacity: 0;
+      transform: translateX(30px);
+    }
+
+    .about-visual.visible {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .about-box {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.02) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-box::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 60%);
+      animation: rotate 20s linear infinite;
+    }
+
+    .about-box-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .about-box-inner svg {
+      width: 80px;
+      height: 80px;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 20px var(--accent-glow));
+    }
+
+    .about-box-inner p {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* Philosophy */
+    .philosophy {
+      text-align: center;
+      padding: 8rem 2rem;
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .philosophy-item {
+      padding: 3rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: var(--transition);
+      opacity: 0;
+      transform: scale(0.9);
+    }
+
+    .philosophy-item.visible {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out, border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .philosophy-item:hover,
+    .philosophy-item:focus-within {
+      border-color: var(--border-accent);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .philosophy-item h3 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .philosophy-item p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .philosophy-divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin: 1.5rem auto;
+      border-radius: 2px;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 4rem 2rem 2rem;
+      background: var(--bg-secondary);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand {
+      max-width: 300px;
+    }
+
+    .footer-brand-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .footer-brand-desc {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 4rem;
+    }
+
+    .footer-links-col h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links-col ul {
+      list-style: none;
+    }
+
+    .footer-links-col li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links-col a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: var(--transition);
+    }
+
+    .footer-links-col a:hover,
+    .footer-links-col a:focus {
+      color: var(--accent);
+      outline: none;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-legal a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: var(--transition);
+    }
+
+    .footer-legal a:hover,
+    .footer-legal a:focus {
+      color: var(--accent);
+      outline: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .game-card,
+      .about-text,
+      .about-visual,
+      .philosophy-item {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        transform: translateY(-150%);
+        transition: transform var(--transition);
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .hero {
+        padding: 7rem 1.5rem 4rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* Focus styles */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg-primary);
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      z-index: 200;
+      transition: top var(--transition);
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <div class="bg-mesh" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" aria-label="Dajai Studio Home">DAJAI STUDIO</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <ul class="nav-links" id="nav-menu" role="menubar">
+        <li role="none"><a href="#games" role="menuitem">Games</a></li>
+        <li role="none"><a href="#about" role="menuitem">About</a></li>
+        <li role="none"><a href="#philosophy" role="menuitem">Philosophy</a></li>
+        <li role="none"><a href="https://play.google.com/store/apps/dev?id=dajai-studio" role="menuitem" target="_blank" rel="noopener noreferrer">Google Play</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-badge">Independent Game Studio</div>
+      <h1 id="hero-title" class="hero-title">DAJAI <span>STUDIO</span></h1>
+      <p class="hero-tagline">WE CREATE GAMES. YOU LIVE THEM.</p>
+      <p class="hero-desc">Independent game studio creating games built to be played, remembered, and experienced.</p>
+      <a href="#games" class="hero-cta" aria-label="Explore our games">
+        EXPLORE OUR GAMES
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </a>
+      <div class="hero-scroll" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="7 13 12 18 17 13"></polyline>
+          <polyline points="7 6 12 11 17 6"></polyline>
+        </svg>
+      </div>
+    </section>
+
+    <section id="games" aria-labelledby="games-title">
+      <div class="section-header">
+        <span class="section-label">Our Portfolio</span>
+        <h2 id="games-title" class="section-title">Our Games</h2>
+        <p class="section-subtitle">Original titles crafted with passion and built for players who demand more.</p>
+      </div>
+      <div class="games-grid">
+        <article class="game-card">
+          <div class="game-icon blazewing" aria-hidden="true">B</div>
+          <h3 class="game-title">Blazewing</h3>
+          <span class="game-genre">Arcade / Endless Flyer</span>
+          <p class="game-desc">Take flight, dodge the danger, beat your high score, and keep the dragon in the sky.</p>
+          <a href="https://play.google.com/store/apps/details?id=com.dajaistudio.blazewing" class="game-link" target="_blank" rel="noopener noreferrer" aria-label="Get Blazewing on Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5ZM16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12ZM20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.9 20.18 13.18L17.89 14.5L15.39 12L17.89 9.5L20.16 10.81ZM6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/>
+            </svg>
+            Get on Google Play
+          </a>
+        </article>
+
+        <article class="game-card">
+          <div class="game-icon brainstorm" aria-hidden="true">Br</div>
+          <h3 class="game-title">BrainStorm</h3>
+          <span class="game-genre">Quiz / Trivia</span>
+          <p class="game-desc">Challenge your knowledge with thousands of questions across multiple categories.</p>
+          <a href="https://play.google.com/store/apps/details?id=com.dajaistudio.brainstorm" class="game-link" target="_blank" rel="noopener noreferrer" aria-label="Get BrainStorm on Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.6 3 21.09 3 20.5ZM16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12ZM20.16 10.81C20.5 11.08 20.75 11.5 20.75 12C20.75 12.5 20.53 12.9 20.18 13.18L17.89 14.5L15.39 12L17.89 9.5L20.16 10.81ZM6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/>
+            </svg>
+            Get on Google Play
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+      <div class="section-header">
+        <span class="section-label">Who We Are</span>
+        <h2 id="about-title" class="section-title">About Dajai Studio</h2>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <p>Dajai Studio is an independent game studio focused on creating original games and interactive experiences.</p>
+          <p>We believe great games are born from bold ideas, relentless iteration, and a deep respect for the player. Every pixel, every mechanic, every moment is crafted with intention.</p>
+          <p>From fast-paced arcade action to brain-teasing trivia, we build worlds that invite you to play, explore, and return.</p>
+        </div>
+        <div class="about-visual">
+          <div class="about-box">
+            <div class="about-box-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              <p>Building worlds,<br>one game at a time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="philosophy" class="philosophy" aria-labelledby="philosophy-title">
+      <div class="section-header">
+        <span class="section-label">Our DNA</span>
+        <h2 id="philosophy-title" class="section-title">Studio Philosophy</h2>
+      </div>
+      <div class="philosophy-grid">
+        <article class="philosophy-item">
+          <h3>CREATE.</h3>
+          <div class="philosophy-divider" aria-hidden="true"></div>
+          <p>We dream up original concepts and bring them to life with craft, care, and creative courage.</p>
+        </article>
+        <article class="philosophy-item">
+          <h3>PLAY.</h3>
+          <div class="philosophy-divider" aria-hidden="true"></div>
+          <p>We design for the joy of play — intuitive, rewarding, and impossible to put down.</p>
+        </article>
+        <article class="philosophy-item">
+          <h3>EXPERIENCE.</h3>
+          <div class="philosophy-divider" aria-hidden="true"></div>
+          <p>We build moments that stick with you long after the screen goes dark.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-name">DAJAI STUDIO</div>
+          <p class="footer-brand-desc">Independent game studio creating original games and interactive experiences for players worldwide.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-links-col">
+            <h4>Games</h4>
+            <ul>
+              <li><a href="https://play.google.com/store/apps/details?id=com.dajaistudio.blazewing" target="_blank" rel="noopener noreferrer">Blazewing</a></li>
+              <li><a href="https://play.google.com/store/apps/details?id=com.dajaistudio.brainstorm" target="_blank" rel="noopener noreferrer">BrainStorm</a></li>
+            </ul>
+          </div>
+          <div class="footer-links-col">
+            <h4>Studio</h4>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#philosophy">Philosophy</a></li>
+              <li><a href="https://play.google.com/store/apps/dev?id=dajai-studio" target="_blank" rel="noopener noreferrer">Google Play</a></li>
+            </ul>
+          </div>
+          <div class="footer-links-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="https://dajai98.github.io/privacy-policy/blazewing/">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; <span id="year"></span> Dajai Studio. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="https://dajai98.github.io/privacy-policy/blazewing/">Privacy Policy</a>
+          <a href="https://play.google.com/store/apps/dev?id=dajai-studio" target="_blank" rel="noopener noreferrer">Google Play</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // Current year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Mobile nav toggle
+      const navToggle = document.querySelector('.nav-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      navToggle.addEventListener('click', function() {
+        const isOpen = navLinks.classList.toggle('open');
+        this.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Close mobile nav on link click
+      navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          navLinks.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Intersection Observer for scroll animations
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.game-card, .about-text, .about-visual, .philosophy-item').forEach(function(el) {
+        observer.observe(el);
+      });
+
+      // Active nav link on scroll
+      const sections = document.querySelectorAll('section[id]');
+      const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+
+      function setActiveNav() {
+        let current = '';
+        sections.forEach(function(section) {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.scrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navItems.forEach(function(item) {
+          item.classList.remove('active');
+          if (item.getAttribute('href') === '#' + current) {
+            item.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', setActiveNav, { passive: true });
+
+      // Smooth scroll polyfill for older browsers (CSS handles modern ones)
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
